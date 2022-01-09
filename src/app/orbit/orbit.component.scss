@@ -1,0 +1,28 @@
+:host ::ng-deep{
+  .orbit {
+    stroke : #FFFFFF;
+    fill : none;
+  }
+  .genre_cluster {
+    stroke : #FFFFFF;
+    fill : #FFFFFF;
+  }
+  .sun {
+    stroke : #FFFFFF;
+    fill : #FFFFFF;
+  }
+  .band {
+    stroke: #FFFFFF;
+    fill: #FFFFFF;
+  }
+  #embeddedSpotify {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  #chapter-text {
+    position: absolute;
+    width: 400px;
+    white-space: pre-line;
+  }
+}
