@@ -28,7 +28,7 @@ export class OrbitComponent implements OnInit {
         return planet
       })
     const router = this.router
-    const w = window.innerWidth, h = window.innerHeight;
+    const w = window.innerWidth, h = window.innerHeight - 10;
     const t0 = Date.now();
     const delta = (Date.now() - t0);
 
