@@ -21,8 +21,8 @@ export class OrbitComponent implements OnInit {
         if(isBand(planet)) {
           return {
             ... planet,
-            distanceToCenter: planet.distanceToCenter * 3,
-            radius: planet.radius * 3
+            distanceToCenter: planet.distanceToCenter * 5,
+            radius: planet.radius * 5
           }
         }
         return planet
@@ -37,7 +37,7 @@ export class OrbitComponent implements OnInit {
 
     const g = svg.append('g');
 
-    g.append('circle').attr('r', 20).attr('cx', w / 2)
+    g.append('circle').attr('r', 50).attr('cx', w / 2)
       .attr('cy', h / 2).attr('class', 'sun');
 
     const container = g.append('g')
