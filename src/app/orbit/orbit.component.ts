@@ -36,9 +36,7 @@ export class OrbitComponent implements OnInit {
       .attr("viewBox", [0, 0, w, h]);
 
     const g = svg.append('g');
-    function zoomed({transform}: any) {
-      g.attr("transform", transform);
-    }
+
     g.append('circle').attr('r', 20).attr('cx', w / 2)
       .attr('cy', h / 2).attr('class', 'sun');
 
@@ -48,9 +46,13 @@ export class OrbitComponent implements OnInit {
     container.selectAll('g.planet').data(dataPlanets).enter().append('g')
       .attr('class', 'genre_cluster').each(function (d, i) {
       // draw the orbit
-      d3.select(this).append('circle')
-        .attr('class', 'orbit')
-        .attr('r', d.distanceToCenter);
+      let existingOrbit = d3.select('#distance-' + d.distanceToCenter);
+      if (existingOrbit.size() === 0) {
+        d3.select(this).append('circle')
+          .attr('id', 'distance-' + d.distanceToCenter)
+          .attr('class', 'orbit')
+          .attr('r', d.distanceToCenter);
+      }
       // draw the planet
       d3.select(this).append('circle')
         .attr('r', d.radius)
@@ -63,9 +65,9 @@ export class OrbitComponent implements OnInit {
             router.navigateByUrl('/' + d.chapterName?.toLowerCase())
           }
           if (isBand(d)) {
-            d3.select('#embeddedSpotify').remove()
+            d3.select('#embedded').remove()
             d3.select('#orbit-container').append('div')
-              .attr('id', 'embeddedSpotify')
+              .attr('id', 'embedded')
               .html(d.embeddedSpotify as string);
           }
         })
@@ -76,7 +78,8 @@ export class OrbitComponent implements OnInit {
           .selectAll('g.moon').data(d.bands as Planet2[]).enter().append('g')
           .attr('class', 'band_cluster').each(function (d, i) {
           // draw the orbit of the moon
-          d3.select(this).append('circle').attr('class', 'orbit')
+          d3.select(this).append('circle')
+            .attr('class', 'orbit')
             .attr('r', d.distanceToCenter);
 
           // draw the moon
@@ -95,7 +98,7 @@ export class OrbitComponent implements OnInit {
         return `rotate(${rotation})`;
       });
 
-    d3.timer(function () {
+    setInterval(() => {
       svg.selectAll('.genre_cluster, .band_cluster')
         .attr('transform', function (d: any) {
           if (isPlanet(d)) {
@@ -104,7 +107,10 @@ export class OrbitComponent implements OnInit {
           }
           return '';
         })
-    });
+    }, 5)
+    // d3.timer(function () {
+    //
+    // });
   }
 
 }

@@ -2,6 +2,7 @@
   .orbit {
     stroke : #FFFFFF;
     fill : none;
+    z-index: 0;
   }
   .genre_cluster {
     stroke : #FFFFFF;
@@ -12,10 +13,18 @@
     fill : #FFFFFF;
   }
   .band {
+    z-index: 10;
     stroke: #FFFFFF;
     fill: #FFFFFF;
   }
-  #embeddedSpotify {
+  .planet {
+    z-index: 10;
+  }
+  .planet:hover {
+    stroke: red;
+    fill: red;
+  }
+  #embedded {
     position: absolute;
     top: 0;
     right: 0;

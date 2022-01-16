@@ -24,6 +24,7 @@ export interface Band extends Planet2 {
 }
 export interface Chapter extends Planet2 {
   chapterName?: string;
+  title?: string;
   description?: string;
   bands?: Band[];
 }
