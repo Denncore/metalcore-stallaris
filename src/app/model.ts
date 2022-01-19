@@ -8,11 +8,13 @@ export interface Planet {
   description?: string;
 }
 
-export const isPlanet = (obj: any): obj is Planet => {
-  return (obj as Planet).phi0 !== undefined;
+export const isPlanet = (obj: any): obj is Planet2 => {
+  return (obj as Planet2).phi0 !== undefined;
 };
 
 export interface Planet2 {
+  id?: number;
+  delta?: number;
   distanceToCenter: number;
   radius: number;
   speed: number;

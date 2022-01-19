@@ -1,4 +1,8 @@
 <div id="orbit-container">
-  <div id="chapter-text" *ngIf="chapterText">{{chapterText}}</div>
+  <div id="chapter-text">
+    <div class="chapter-title"></div>
+    <div class="chapter-body"></div>
+    <button class="back" (click)="reset()">zurück</button>
+  </div>
   <div id="starmap"></div>
 </div>

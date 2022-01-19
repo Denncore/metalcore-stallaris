@@ -7,6 +7,8 @@ import { StellarisComponent } from './stellaris/stellaris.component';
 import { OrbitComponent } from './orbit/orbit.component';
 import { MetalcoreComponent } from './metalcore/metalcore.component';
 import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { ChapterDetailComponent } from './chapter-detail/chapter-detail.componen
     StellarisComponent,
     OrbitComponent,
     MetalcoreComponent,
-    ChapterDetailComponent
+    ChapterDetailComponent,
+    WelcomeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule
   ],

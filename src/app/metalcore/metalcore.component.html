@@ -1,3 +1,4 @@
-<h1>the universe
+<h1 [routerLink]="['/']">the universe
 of metalcore</h1>
-<app-orbit [planets]="genres"></app-orbit>
+
+<app-orbit *ngIf="(genres$ | async) as chapter" [planets]="chapter"></app-orbit>

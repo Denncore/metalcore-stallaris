@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chapter } from 'src/app/model';
-import { CHAPTERS } from 'src/app/data';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-metalcore',
@@ -8,8 +9,10 @@ import { CHAPTERS } from 'src/app/data';
   styleUrls: ['./metalcore.component.scss']
 })
 export class MetalcoreComponent implements OnInit {
-  genres: Chapter[] = CHAPTERS;
-  constructor() { }
+  genres$: Observable<Chapter[]>;
+  constructor(private route: ActivatedRoute) {
+    this.genres$ = route.data.pipe(map(data => data['chapters'] as Chapter[]))
+  }
 
   ngOnInit(): void {
   }
