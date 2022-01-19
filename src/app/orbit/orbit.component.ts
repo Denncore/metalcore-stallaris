@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Band, Chapter, isBand, isGenre, isPlanet, Planet2 } from 'src/app/model';
 import * as d3 from 'd3';
-import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { Router } from '@angular/router';
 
 enum DeltaType {
   GENRE, BAND
@@ -13,9 +12,9 @@ enum DeltaType {
   templateUrl: './orbit.component.html',
   styleUrls: ['./orbit.component.scss']
 })
-export class OrbitComponent implements OnInit {
-  @Input() chapterText: string | null = null;
-  @Input() planets: Planet2[] = [];
+export class OrbitComponent implements AfterViewInit {
+  @Input() part: string | null = null;
+  @Input() planets: Planet2[] | null = null;
 
   private dataPlanets: Planet2[] = [];
   private w = window.innerWidth;
@@ -36,21 +35,24 @@ export class OrbitComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     const component: OrbitComponent = this;
-    component.dataPlanets = component.planets
-      .map(planet => {
-        if (isBand(planet)) {
-          return {
-            ...planet,
-            distanceToCenter: planet.distanceToCenter * 5,
-            radius: planet.radius * 5
-          };
-        }
-        return planet;
-      });
-
-    component.svg = d3.select('#starmap').insert('svg')
+    if (component.planets) {
+      component.dataPlanets = component.planets
+        .map(planet => {
+          if (isBand(planet)) {
+            return {
+              ...planet,
+              distanceToCenter: planet.distanceToCenter * 5,
+              radius: planet.radius * 5
+            };
+          }
+          return planet;
+        });
+    }
+    console.log('HUI', d3.select('#starmap-' + component.part))
+    console.log('HUI', '#starmap-' + component.part)
+    component.svg = d3.select('#starmap-' + component.part).insert('svg')
       .attr('viewBox', [0, 0, this.w, this.h]).on('click', (event, i) => {
         component.reset();
       });
@@ -80,7 +82,7 @@ export class OrbitComponent implements OnInit {
             .attr('cursor', 'default');
       }).on('click', function () {
       if (component.router.url.indexOf('part-1') > -1) {
-        component.router.navigateByUrl('/part-2');
+        component.router.navigate(['/part-2']);
       }
     });
 
@@ -89,6 +91,8 @@ export class OrbitComponent implements OnInit {
 
     container.selectAll('g.planet').data(component.dataPlanets).enter().append('g')
       .attr('class', 'genre_cluster').each(function (d, i) {
+
+      console.log('HUUIIII');
       // draw the orbit
       let existingOrbit = d3.select('#distance-' + d.distanceToCenter);
       if (existingOrbit.size() === 0) {

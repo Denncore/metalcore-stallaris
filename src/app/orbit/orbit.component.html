@@ -4,5 +4,5 @@
     <div class="chapter-body"></div>
     <button class="back" (click)="reset()">zurück</button>
   </div>
-  <div id="starmap"></div>
+  <div *ngIf="part" [id]="'starmap-' + part"></div>
 </div>

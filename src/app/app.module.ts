@@ -3,26 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StellarisComponent } from './stellaris/stellaris.component';
 import { OrbitComponent } from './orbit/orbit.component';
 import { MetalcoreComponent } from './metalcore/metalcore.component';
-import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StellarisComponent,
     OrbitComponent,
     MetalcoreComponent,
-    ChapterDetailComponent,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
