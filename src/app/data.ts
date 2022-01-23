@@ -83,8 +83,8 @@ export const METALCORE_DESCRIPTION: Description = {
 }
 
 export const METALCORE_DESCRIPTION_2: Description = {
-  title: '',
-  text: 'die entwicklung des metalcores\n' +
+  text: '',
+  title: 'die entwicklung des metalcores\n' +
     'hat einige etappen bereits schon\n' +
     'durchlebt, schaue wie das genre\n' +
     'sich bis in unsere heutige zeit\n' +

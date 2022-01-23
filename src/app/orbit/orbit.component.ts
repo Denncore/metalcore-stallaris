@@ -261,7 +261,7 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
       this.deltaGenreIncrease = this.createIntervall(DeltaType.GENRE);
       this.isZoomed = false;
       d3.select('#embedded').remove();
-      this.store.dispatch(DataActions.hideDescription());
+      this.store.dispatch(DataActions.updateToDefaultDescription({urlPart: this.router.url}));
     }
   }
 

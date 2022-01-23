@@ -39,4 +39,7 @@ export class ChapterContentComponent {
     this.store.dispatch(DataActions.updateDescription({description}))
   }
 
+  notOnFirstPage() {
+    return this.router.url.indexOf('part-1') === -1;
+  }
 }
