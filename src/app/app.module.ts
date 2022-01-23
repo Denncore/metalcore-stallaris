@@ -13,6 +13,7 @@ import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { reducers } from 'src/app/store';
 import { FooterComponent } from './footer/footer.component';
 import { SourcesComponent } from './sources/sources.component';
+import { OpenHelpComponent } from './open-help/open-help.component';
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function(state, action) {
@@ -35,6 +36,7 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     ChapterContentComponent,
     FooterComponent,
     SourcesComponent,
+    OpenHelpComponent,
   ],
   imports: [
     CommonModule,

@@ -158,10 +158,18 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
           }
         }).on('mouseover', function () {
           clearInterval(component.deltaGenreIncrease);
+          if (isGenre(d)) {
+            d3.select('#hoverTitle')
+              .text(d.title as string)
+          }
         })
           .on('mouseout', function () {
             if (!component.isZoomed) {
               component.deltaGenreIncrease = component.createIntervall(DeltaType.GENRE);
+            }
+            if (isGenre(d)) {
+              d3.select('#hoverTitle')
+                .text('')
             }
           });
       }

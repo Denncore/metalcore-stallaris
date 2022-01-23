@@ -1,0 +1,15 @@
+@import "src/variables";
+
+div {
+  position: absolute;
+  right: 40px;
+  top: 36px;
+  border: $line-stroke-width solid $stroke-color;
+  border-radius: 40px;
+  padding: 8px 15px;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    background: rgba(255, 255, 255, 0.34);
+  }
+}

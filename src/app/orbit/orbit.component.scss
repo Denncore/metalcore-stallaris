@@ -1,21 +1,30 @@
+@import 'src/variables';
+
 :host ::ng-deep{
   .orbit {
-    stroke : #FFFFFF;
+    stroke : $stroke-color;
     fill : none;
     z-index: 0;
   }
   .genre_cluster {
-    stroke : #FFFFFF;
-    fill : #FFFFFF;
+    stroke : $stroke-color;
+    fill : $stroke-color;
   }
   .sun {
-    stroke : #FFFFFF;
-    fill : #FFFFFF;
+    stroke : $stroke-color;
+    fill : $stroke-color;
   }
   .band {
     z-index: 10;
-    stroke: #FFFFFF;
-    fill: #FFFFFF;
+    stroke: $stroke-color;
+    fill: $stroke-color;
+  }
+
+  #hoverTitle {
+    position: absolute;
+    left: 458px;
+    top: 231px;
+    background-color: $background-color;
   }
 
   #embedded {

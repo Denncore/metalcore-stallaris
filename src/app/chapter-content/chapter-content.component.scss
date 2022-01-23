@@ -1,6 +1,8 @@
+@import "src/variables";
+
 .chapter-content {
   position: absolute;
-  background: #333333;
+  background: $background-color;
 
   width: 369px;
   height: 100vh;
@@ -9,40 +11,30 @@
 
   h1 {
     white-space: pre;
-    background: #333333;
+    background: $background-color;
     cursor: pointer;
     top: 38px;
-    font-size: 45px;
-    line-height: 44px;
+    font-size: $header-size;
+    line-height: 50px;
     left: 20px;
   }
 
   #chapter-text {
     position: absolute;
-    width: 369px;
+    width: 331px;
     white-space: pre-line;
     top: 223px;
     left: 20px;
     border-radius: 20px;
-    background-color: #333333;
+    background-color: $background-color;
 
     .chapter-title {
       margin-bottom: 25px;
     }
 
     .chapter-body {
-      overflow: hidden;
+      overflow: auto;
       max-height: 53vh;
-      &.scrollable {
-        overflow: auto;
-        margin-bottom: 25px;
-      }
     }
-
-    .expand {
-      cursor: pointer;
-    }
-
   }
-
 }

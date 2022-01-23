@@ -1,8 +1,10 @@
+@import "src/variables";
+
 .sources {
   position: absolute;
-  left: 125px;
+  left: $margin-left;
   top: 38px;
-  font-size: 20px;
+  font-size: $text-size;
   height: 100vh;
   h1 {
     position: relative;
@@ -21,7 +23,7 @@
     }
   }
   a {
-    color: white;
+    color: $text-color;
     text-decoration: none;
   }
   button.back {

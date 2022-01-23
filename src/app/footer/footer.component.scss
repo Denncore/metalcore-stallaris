@@ -1,7 +1,9 @@
+@import "src/variables";
+
 p {
   position: absolute;
   bottom: 0;
-  left: 125px;
+  left: $margin-left;
   font-size: 15px;
   a {
     color: white;
