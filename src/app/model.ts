@@ -44,4 +44,5 @@ export interface Description {
   title?: string;
   text?: string;
   isHelpText?: boolean;
+  isDefault?: boolean;
 }

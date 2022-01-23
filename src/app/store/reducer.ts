@@ -1,20 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import { Description } from 'src/app/model';
-import { CHAPTER_DESCRIPTION } from 'src/app/data';
+import { HELP_DESCRIPTION } from 'src/app/data';
 import * as DataActions from './actions';
 
 export interface Data {
-  description?: Description
+  description?: Description;
   showDescription?: boolean;
 }
 
 
 export const initialState: Data = {
-  description: {
-    title: CHAPTER_DESCRIPTION.title,
-    text: CHAPTER_DESCRIPTION.description,
-    isHelpText: CHAPTER_DESCRIPTION.isHelpPage
-  },
+  description: {...HELP_DESCRIPTION},
   showDescription: true
 };
 
@@ -22,10 +18,10 @@ export const dataReducer = createReducer(
   initialState,
 
   on(DataActions.updateDescription, (state, action) => {
-    return { ...state, description: action.description, showDescription: true};
+    return {...state, description: action.description, showDescription: true};
   }),
 
   on(DataActions.hideDescription, (state) => {
-    return { ...state, showDescription: false};
+    return {...state, showDescription: false};
   })
 );

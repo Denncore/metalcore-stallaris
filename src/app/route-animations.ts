@@ -11,7 +11,7 @@ export const fader =
         })
       ], {optional: true}),
       query(':enter', [
-        animate('1000ms ease-in',
+        animate('600ms ease-in',
           style({
             opacity: 1
           }))
@@ -27,7 +27,7 @@ export const fader =
         })
       ], {optional: true}),
       query(':enter', [
-        animate('1000ms ease-in',
+        animate('600ms ease-in',
           style({
             opacity: 1,
             transform: 'scale(1)'

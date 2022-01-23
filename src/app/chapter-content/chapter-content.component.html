@@ -4,7 +4,7 @@ OF METALCORE</h1>
   <div *ngIf="(showDescription$ | async) && (description$ | async) as description" id="chapter-text">
     <div class="chapter-title">{{description.title}}</div>
     <div class="chapter-body">{{description.text}}</div>
-    <button class="back" *ngIf="description?.isHelpText" (click)="closeHelpText()"> danke, los geht's!</button>
-    <button class="back" *ngIf="!description?.isHelpText" (click)="reset()"> zurück</button>
+    <button class="back" *ngIf="!description.isDefault && description?.isHelpText" (click)="closeHelpText()"> danke, los geht's!</button>
+    <button class="back" *ngIf="!description.isDefault && !description?.isHelpText" (click)="reset()"> zurück</button>
   </div>
 </div>

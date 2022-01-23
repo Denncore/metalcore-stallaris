@@ -3,7 +3,7 @@ import { Band, Chapter, Description, isBand, isGenre, isPlanet, Planet2 } from '
 import * as d3 from 'd3';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { CHAPTER_DESCRIPTION } from 'src/app/data';
+import { HELP_DESCRIPTION } from 'src/app/data';
 import { State } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import * as DataActions from 'src/app/store/actions';
