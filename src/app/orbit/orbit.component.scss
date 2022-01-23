@@ -23,36 +23,5 @@
     top: 0;
     right: 0;
   }
-  #chapter-text {
-    display: none;
-    position: absolute;
-    width: 400px;
-    white-space: pre-line;
-    top: 150px;
-    left: 20px;
-    padding: 20px;
-    background-color: #333333;
-    border-radius: 20px;
-    .chapter-title {
-      margin-bottom: 25px;
-    }
-    .chapter-body {
-      overflow: auto;
-      height: 65vh;
-    }
-    .back {
-      margin-top: 30px;
-      width: 100%;
-      padding: 10px;
-      background: #333333;
-      border: 1px solid white;
-      color: white;
-      border-radius: 14px;
-      cursor: pointer;
 
-      &:hover {
-        background: rgba(255, 255, 255, 0.34);
-      }
-    }
-  }
 }

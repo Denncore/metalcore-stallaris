@@ -1,5 +1,33 @@
 import { Chapter } from 'src/app/model';
 
+export const CHAPTER_DESCRIPTION = {
+  show: true,
+  isHelpPage: true,
+  title: 'wilkommen im univerum\n' +
+  'des metalcore.\n',
+  description: 'das universum leitet dich durch\n' +
+  'die geschichte und entwicklung\n' +
+  'der musik und zeigt wie facetten\n' +
+  '-\n' +
+  'reich ein noch recht junges\n' +
+  'genre wie metalcore sein kann.\n' +
+  'das komplette konstrukt zeigt das\n' +
+  'ganze universum des metalcores\n' +
+  'in zwei teilen. die anfänge und die\n' +
+  'entwicklung des genres bis heute.\n' +
+  'die mittleren orbits sind die\n' +
+  'kapitel der geschichte. der kern führt\n' +
+  'dich tiefer ins metalcore universum.\n' +
+  'du muss nur klicken.\n' +
+  'klicke dich durch die einzelnen\n' +
+  'kapitel und höre dir dazu die musik\n' +
+  'ein, welche den abschnitt der\n' +
+  'geschichte beeinflusst haben um\n' +
+  'metalcore zu dem zu machen, was\n' +
+  'es heute ist.\n' +
+  'viel spaß beim entdecken!'
+}
+
 export const WELCOME: Chapter[] = [
   {
   chapterName: 'filler',
@@ -33,7 +61,7 @@ export const CHAPTERS: Chapter[] = [
   {
     chapterName: 'chapter-1',
     title: 'pioniere des metalcore',
-    distanceToCenter: 380,
+    distanceToCenter: 420,
     radius: 10,
     speed: 3,
     phi0: 190,

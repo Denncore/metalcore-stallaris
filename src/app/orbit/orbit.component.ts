@@ -1,7 +1,12 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
-import { Band, Chapter, isBand, isGenre, isPlanet, Planet2 } from 'src/app/model';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { Band, Chapter, Description, isBand, isGenre, isPlanet, Planet2 } from 'src/app/model';
 import * as d3 from 'd3';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { CHAPTER_DESCRIPTION } from 'src/app/data';
+import { State } from 'src/app/store';
+import { Store } from '@ngrx/store';
+import * as DataActions from 'src/app/store/actions';
 
 enum DeltaType {
   GENRE, BAND
@@ -12,12 +17,13 @@ enum DeltaType {
   templateUrl: './orbit.component.html',
   styleUrls: ['./orbit.component.scss']
 })
-export class OrbitComponent implements AfterViewInit {
+export class OrbitComponent implements AfterViewInit, OnDestroy {
   @Input() part: string | null = null;
   @Input() planets: Planet2[] | null = null;
   @Input() withSun = true;
   @Input() marginLeft = 0;
   @Input() marginTop = 0;
+  @Input() reset$: Observable<any> | null = null;
 
   private w: number = 0;
   private h: number = 0;
@@ -34,12 +40,22 @@ export class OrbitComponent implements AfterViewInit {
   private g: d3.Selection<SVGGElement, unknown, HTMLElement, any> | undefined;
 
   private zoom: any;
+  private subscription: Subscription | undefined = undefined;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<State>) {
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
     const component: OrbitComponent = this;
+
+    if (component.reset$) {
+      component.subscription = component.reset$.subscribe(() => component.reset());
+    }
+
     component.w = window.innerWidth;
     component.h = window.innerHeight - 10;
     if (component.planets) {
@@ -98,7 +114,6 @@ export class OrbitComponent implements AfterViewInit {
     container.selectAll('g.planet').data(component.dataPlanets).enter().append('g')
       .attr('class', 'genre_cluster').each(function (d, i) {
 
-      console.log('HUUIIII');
       // draw the orbit
       let existingOrbit = d3.select('#distance-' + d.distanceToCenter);
       if (existingOrbit.size() === 0) {
@@ -136,19 +151,19 @@ export class OrbitComponent implements AfterViewInit {
             d3.select(this)
               .attr('cursor', 'pointer');
           });
-      } else if(component.withSun) {
-          planet.on('click', function (event, i) {
-            if (isGenre(d)) {
-              component.clicked(event, d);
+      } else if (component.withSun) {
+        planet.on('click', function (event, i) {
+          if (isGenre(d)) {
+            component.clicked(event, d);
+          }
+        }).on('mouseover', function () {
+          clearInterval(component.deltaGenreIncrease);
+        })
+          .on('mouseout', function () {
+            if (!component.isZoomed) {
+              component.deltaGenreIncrease = component.createIntervall(DeltaType.GENRE);
             }
-          }).on('mouseover', function () {
-            clearInterval(component.deltaGenreIncrease);
-          })
-            .on('mouseout', function () {
-              if (!component.isZoomed) {
-                component.deltaGenreIncrease = component.createIntervall(DeltaType.GENRE);
-              }
-            });
+          });
       }
 
 
@@ -238,8 +253,7 @@ export class OrbitComponent implements AfterViewInit {
       this.deltaGenreIncrease = this.createIntervall(DeltaType.GENRE);
       this.isZoomed = false;
       d3.select('#embedded').remove();
-      d3.select('#chapter-text')
-        .style('display', 'none');
+      this.store.dispatch(DataActions.hideDescription());
     }
   }
 
@@ -270,15 +284,12 @@ export class OrbitComponent implements AfterViewInit {
     );
 
     if (data && data.description) {
-      let chapterText = d3.select('#chapter-text')
-        .style('display', 'block');
-      chapterText
-        .select('.chapter-title')
-        .text(data.title as string);
-
-      chapterText
-        .select('.chapter-body')
-        .text(data.description as string);
+      const description: Description = {
+        title: data.title,
+        text: data.description,
+        isHelpText: false
+      }
+      this.store.dispatch(DataActions.updateDescription({description}));
     }
   }
 

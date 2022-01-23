@@ -1,0 +1,48 @@
+.chapter-content {
+  position: absolute;
+  background: #333333;
+
+  width: 369px;
+  height: 100vh;
+  left: 104px;
+  padding: 20px;
+
+  h1 {
+    white-space: pre;
+    background: #333333;
+    cursor: pointer;
+    top: 38px;
+    font-size: 45px;
+    line-height: 44px;
+    left: 20px;
+  }
+
+  #chapter-text {
+    position: absolute;
+    width: 369px;
+    white-space: pre-line;
+    top: 223px;
+    left: 20px;
+    border-radius: 20px;
+    background-color: #333333;
+
+    .chapter-title {
+      margin-bottom: 25px;
+    }
+
+    .chapter-body {
+      overflow: hidden;
+      max-height: 53vh;
+      &.scrollable {
+        overflow: auto;
+        margin-bottom: 25px;
+      }
+    }
+
+    .expand {
+      cursor: pointer;
+    }
+
+  }
+
+}

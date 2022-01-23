@@ -39,3 +39,9 @@ export const isGenre = (obj: any): obj is Chapter => {
 export const isBand = (obj: any): obj is Band => {
   return (obj as Band).bandName !== undefined;
 };
+
+export interface Description {
+  title?: string;
+  text?: string;
+  isHelpText?: boolean;
+}

@@ -1,0 +1,32 @@
+.sources {
+  position: absolute;
+  left: 125px;
+  top: 38px;
+  font-size: 20px;
+  height: 100vh;
+  h1 {
+    position: relative;
+    left: 0;
+    cursor: pointer;
+    margin-bottom: 70px;
+    font-size: 45px;
+    line-height: 44px;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      margin-bottom: 2px;
+      white-space: pre;
+    }
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  button.back {
+    width: 180px;
+    position: fixed;
+    bottom: 70px;
+  }
+}

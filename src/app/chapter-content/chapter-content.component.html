@@ -1,0 +1,11 @@
+<div class="chapter-content">
+  <h1 [routerLink]="['/']">THE UNIVERSE
+OF METALCORE</h1>
+  <div *ngIf="(showDescription$ | async) && (description$ | async) as description" id="chapter-text">
+    <div class="chapter-title">{{description.title}}</div>
+    <div #chapterBody class="chapter-body" [ngClass]="{'scrollable': scrollable}">{{description.text}}</div>
+    <div *ngIf="showExpandButton()" class="expand" (click)="makeScrollable()" >[…]</div>
+    <button class="back" *ngIf="description?.isHelpText" (click)="closeHelpText()"> danke, los geht's!</button>
+    <button class="back" *ngIf="!description?.isHelpText" (click)="reset()"> zurück</button>
+  </div>
+</div>

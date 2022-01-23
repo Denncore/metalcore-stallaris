@@ -1,4 +1,2 @@
-<h1 [routerLink]="['/']">the universe
-of metalcore</h1>
-
-<app-orbit *ngIf="chapters && part" [planets]="chapters" [part]="part"></app-orbit>
+<app-chapter-content (resetEmitter)="resetNext()"></app-chapter-content>
+<app-orbit *ngIf="chapters && part" [planets]="chapters" [part]="part" [marginLeft]="200" [reset$]="reset$"></app-orbit>
