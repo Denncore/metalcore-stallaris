@@ -15,6 +15,7 @@ export const isPlanet = (obj: any): obj is Planet2 => {
 export interface Planet2 {
   id?: number;
   delta?: number;
+  img?: string;
   distanceToCenter: number;
   radius: number;
   speed: number;

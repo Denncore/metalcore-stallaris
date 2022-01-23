@@ -2,7 +2,7 @@ import { animate, query, style, transition, trigger } from '@angular/animations'
 
 export const fader =
   trigger('routeAnimations', [
-    transition('* <=> *', [
+    transition('PartOne => PartTwo', [
       query(':enter, :leave', [
         style({
           position: 'absolute',

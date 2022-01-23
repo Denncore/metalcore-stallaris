@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { Band, Chapter, isBand, isGenre, isPlanet, Planet2 } from 'src/app/model';
 import * as d3 from 'd3';
 import { Router } from '@angular/router';
@@ -15,10 +15,13 @@ enum DeltaType {
 export class OrbitComponent implements AfterViewInit {
   @Input() part: string | null = null;
   @Input() planets: Planet2[] | null = null;
+  @Input() withSun = true;
+  @Input() marginLeft = 0;
+  @Input() marginTop = 0;
 
+  private w: number = 0;
+  private h: number = 0;
   private dataPlanets: Planet2[] = [];
-  private w = window.innerWidth;
-  private h = window.innerHeight - 10;
   private isZoomed = false;
   private delta = {
     deltaGenre: 1000000,
@@ -37,6 +40,8 @@ export class OrbitComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const component: OrbitComponent = this;
+    component.w = window.innerWidth;
+    component.h = window.innerHeight - 10;
     if (component.planets) {
       component.dataPlanets = component.planets
         .map(planet => {
@@ -50,44 +55,45 @@ export class OrbitComponent implements AfterViewInit {
           return planet;
         });
     }
-    console.log('HUI', d3.select('#starmap-' + component.part))
-    console.log('HUI', '#starmap-' + component.part)
     component.svg = d3.select('#starmap-' + component.part).insert('svg')
       .attr('viewBox', [0, 0, this.w, this.h]).on('click', (event, i) => {
         component.reset();
       });
-    component.g = component.svg.append('g')
+    component.g = component.svg.append('g');
+
 
     function zoomed({transform}: any): void {
       if (!component.g) {
-      return;
+        return;
+      }
+      component.g.attr('transform', transform);
     }
-    component.g.attr('transform', transform);
-  }
 
     component.zoom = d3.zoom()
       .scaleExtent([1, 40])
       .on('zoom', zoomed);
 
-    component.g.append('circle').attr('r', 50).attr('cx', component.w / 2)
-      .attr('cy', component.h / 2).attr('class', 'sun')
-      .on('mouseover', function () {
-        if (component.router.url.indexOf('part-1') > -1) {
-          d3.select(this)
+    if (component.withSun) {
+      component.g.append('circle').attr('r', 50).attr('cx', component.getRealXCoordinate())
+        .attr('cy', component.getRealYCoordinate()).attr('class', 'sun')
+        .on('mouseover', function () {
+          if (component.router.url.indexOf('part-1') > -1) {
+            d3.select(this)
               .attr('cursor', 'pointer');
-        }
-      })
-      .on('mouseout', function () {
+          }
+        })
+        .on('mouseout', function () {
           d3.select(this)
             .attr('cursor', 'default');
-      }).on('click', function () {
-      if (component.router.url.indexOf('part-1') > -1) {
-        component.router.navigate(['/part-2']);
-      }
-    });
+        }).on('click', function () {
+        if (component.router.url.indexOf('part-1') > -1) {
+          component.router.navigate(['/part-2']);
+        }
+      });
+    }
 
     const container = component.g.append('g')
-      .attr('transform', 'translate(' + component.w / 2 + ',' + component.h / 2 + ')');
+      .attr('transform', 'translate(' + component.getRealXCoordinate() + ',' + component.getRealYCoordinate() + ')');
 
     container.selectAll('g.planet').data(component.dataPlanets).enter().append('g')
       .attr('class', 'genre_cluster').each(function (d, i) {
@@ -99,28 +105,52 @@ export class OrbitComponent implements AfterViewInit {
         d3.select(this).append('circle')
           .attr('id', 'distance-' + d.distanceToCenter)
           .attr('class', 'orbit')
-          .attr('r', d.distanceToCenter);
+          .attr('r', d.distanceToCenter)
+          .attr('stroke-width', '2');
       }
       // draw the planet
-      d3.select(this).append('circle')
+      const planet = d3.select(this).append('circle')
         .attr('r', d.radius)
         .attr('cx', d.distanceToCenter)
         .attr('cy', 0)
         .attr('class', 'planet')
         .attr('cursor', 'pointer')
-        .attr('id', 'planet-' + d.id)
-        .on('click', function (event, i) {
-          if (isGenre(d)) {
-            component.clicked(event, d);
-          }
-        }).on('mouseover', function () {
-        clearInterval(component.deltaGenreIncrease);
-      })
-        .on('mouseout', function () {
-          if (!component.isZoomed) {
-            component.deltaGenreIncrease = component.createIntervall(DeltaType.GENRE);
-          }
-        });
+        .attr('id', 'planet-' + d.id);
+
+      if (d.img) {
+        d3.select(this).append('image')
+          .attr('xlink:href', d.img)
+          .attr('x', -387)
+          .attr('y', 200)
+          .attr('width', 100)
+          .attr('height', 100)
+          .attr('transform', `rotate(-${d.phi0})`)
+          .on('click', function (event, i) {
+            component.router.navigateByUrl('/part-1');
+          })
+          .on('mouseover', function () {
+            d3.select(this)
+              .attr('cursor', 'pointer');
+          })
+          .on('mouseout', function () {
+            d3.select(this)
+              .attr('cursor', 'pointer');
+          });
+      } else if(component.withSun) {
+          planet.on('click', function (event, i) {
+            if (isGenre(d)) {
+              component.clicked(event, d);
+            }
+          }).on('mouseover', function () {
+            clearInterval(component.deltaGenreIncrease);
+          })
+            .on('mouseout', function () {
+              if (!component.isZoomed) {
+                component.deltaGenreIncrease = component.createIntervall(DeltaType.GENRE);
+              }
+            });
+      }
+
 
       // draw it's Moons
       if (isGenre(d)) {
@@ -130,7 +160,8 @@ export class OrbitComponent implements AfterViewInit {
           // draw the orbit of the moon
           d3.select(this).append('circle')
             .attr('class', 'orbit')
-            .attr('r', d.distanceToCenter);
+            .attr('r', d.distanceToCenter)
+            .attr('stroke-width', '2');
 
           // draw the moon
           d3.select(this).append('circle').attr('r', d.radius).attr('cx', d.distanceToCenter)
@@ -202,7 +233,7 @@ export class OrbitComponent implements AfterViewInit {
       this.svg.transition().duration(750).call(
         this.zoom.transform as any,
         d3.zoomIdentity,
-        d3.zoomTransform(this.svg.node() as any).invert([this.w / 2, this.h / 2])
+        d3.zoomTransform(this.svg.node() as any).invert([(this.getRealXCoordinate()) + this.marginLeft, this.getRealYCoordinate()])
       );
       this.deltaGenreIncrease = this.createIntervall(DeltaType.GENRE);
       this.isZoomed = false;
@@ -234,7 +265,7 @@ export class OrbitComponent implements AfterViewInit {
 
     this.svg.transition().duration(750).call(
       this.zoom.transform as any,
-      d3.zoomIdentity.translate(this.w / 2, this.h / 2).scale(5).translate(-event.clientX, -event.clientY),
+      d3.zoomIdentity.translate(this.getRealXCoordinate(), this.getRealYCoordinate()).scale(5).translate(-event.clientX, -event.clientY),
       d3.pointer(event)
     );
 
@@ -249,6 +280,14 @@ export class OrbitComponent implements AfterViewInit {
         .select('.chapter-body')
         .text(data.description as string);
     }
+  }
+
+  public getRealXCoordinate(): number {
+    return (this.w / 2) + this.marginLeft;
+  }
+
+  public getRealYCoordinate(): number {
+    return (this.h / 2) + this.marginTop;
   }
 }
 

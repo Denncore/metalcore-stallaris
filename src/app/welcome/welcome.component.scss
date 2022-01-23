@@ -1,8 +1,10 @@
 h1 {
   white-space: pre;
-  font-size: 80px;
-  padding: 50px 50px 0;
-  margin-bottom: 0;
+  font-size: 153px;
+  position: absolute;
+  left: 125px;
+  top: 219px;
+  line-height: 147px;
 }
 a {
   text-decoration: none;
@@ -14,4 +16,8 @@ a {
   &:hover {
     color: #9a9a9a;
   }
+}
+
+div {
+  height: 100vh;
 }

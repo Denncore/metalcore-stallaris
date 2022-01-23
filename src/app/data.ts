@@ -1,5 +1,34 @@
 import { Chapter } from 'src/app/model';
 
+export const WELCOME: Chapter[] = [
+  {
+  chapterName: 'filler',
+  distanceToCenter: 415,
+  radius: 15,
+  speed: 3,
+  phi0: 10,
+  bands: []
+  },
+  {
+    chapterName: 'start',
+    distanceToCenter: 415,
+    radius: 45,
+    speed: 0,
+    phi0: 144,
+    img: '/assets/icons/play_button.svg',
+    bands: [
+      {
+        bandName: '1', distanceToCenter: 67, radius: 6, speed: 4, phi0: 80,
+      },
+      {
+        bandName: '2', distanceToCenter: 90, radius: 0, speed: 0, phi0: 0,
+      },
+      {
+        bandName: '3', distanceToCenter: 130, radius: 14, speed: 6, phi0: 100,
+      },
+    ]
+  }
+];
 export const CHAPTERS: Chapter[] = [
   {
     chapterName: 'chapter-1',
