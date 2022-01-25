@@ -137,27 +137,27 @@ export const CHAPTERS: Chapter[] = [
         embeddedSpotify: '<iframe src="https://open.spotify.com/embed/artist/3L3FDQpQskFnHiISPYHmBo?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'unbroken', distanceToCenter: 30, radius: 4, speed: 8, phi0: 100,
+        bandName: 'unbroken', distanceToCenter: 30, radius: 4, speed: 3, phi0: 100,
         embeddedSpotify: '<iframe src="https://open.spotify.com/embed/artist/0c7r2XJOGfxr6Mosn8msVv?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'earth crisis', distanceToCenter: 30, radius: 6, speed: 15, phi0: 190,
+        bandName: 'earth crisis', distanceToCenter: 30, radius: 6, speed: 6, phi0: 190,
         embeddedSpotify: '<iframe src="https://open.spotify.com/embed/artist/4ITkzAQWPILwWpEWJxHB9g?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'downcast', distanceToCenter: 40, radius: 7, speed: 8, phi0: 10,
+        bandName: 'downcast', distanceToCenter: 40, radius: 7, speed: 5, phi0: 10,
         embeddedSpotify: '<iframe width="560" height="315" src="https://www.youtube.com/embed/VH1v1ru8xIU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
       },
       {
-        bandName: 'strife', distanceToCenter: 50, radius: 5, speed: 6, phi0: 50,
+        bandName: 'strife', distanceToCenter: 50, radius: 5, speed: 7, phi0: 50,
         embeddedSpotify: '<iframe src="https://open.spotify.com/embed/artist/68qsduRCs8caw95bbF4IDD?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'ringworm', distanceToCenter: 65, radius: 4, speed: 6, phi0: 250,
+        bandName: 'ringworm', distanceToCenter: 65, radius: 4, speed: 2, phi0: 250,
         embeddedSpotify: '<iframe src="https://open.spotify.com/embed/artist/1mVvXNKbCaUapInbgHCDRV?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'deadguy', distanceToCenter: 65, radius: 7, speed: 8, phi0: 10,
+        bandName: 'deadguy', distanceToCenter: 65, radius: 7, speed: 4, phi0: 10,
         embeddedSpotify: '<iframe src="https://open.spotify.com/embed/artist/06p0y7edz7fFY3A85oiUgF?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
@@ -193,7 +193,7 @@ export const CHAPTERS: Chapter[] = [
     title: '02 etablierung des genres',
     distanceToCenter: 320,
     radius: 10,
-    speed: 4,
+    speed: 3,
     phi0: 10,
     bands: [
       {
