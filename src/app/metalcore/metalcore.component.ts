@@ -14,7 +14,6 @@ import { HELP_DESCRIPTION, METALCORE_DESCRIPTION, METALCORE_DESCRIPTION_2 } from
 })
 export class MetalcoreComponent implements OnInit {
   chapters: Chapter[] | undefined;
-  additionalChapter: Chapter[] | undefined;
   part: string | undefined;
 
   private reset: Subject<any> = new Subject();
@@ -31,9 +30,10 @@ export class MetalcoreComponent implements OnInit {
 
         if (this.part.indexOf('PartOne') > -1) {
           this.store.dispatch(DataActions.updateDescription({ description: {...HELP_DESCRIPTION} }))
-        } else {
+        } else if (this.part.indexOf('PartTwo') > -1){
           this.store.dispatch(DataActions.updateDescription({ description: {...METALCORE_DESCRIPTION_2} }))
-          this.additionalChapter
+        } else {
+          this.store.dispatch(DataActions.hideDescription())
         }
       });
   }

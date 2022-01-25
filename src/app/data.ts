@@ -397,6 +397,28 @@ export const CHAPTERS: Chapter[] = [
       'alissa white-gluz.'
   }
 ];
+export const ADDITIONAL_CHAPTERS: Chapter[] = [
+  {
+    chapterName: 'chapter-x1',
+    title: 'moins',
+    distanceToCenter: 80,
+    radius: 10,
+    speed: 3,
+    phi0: 190,
+    bands: [
+    ]
+  },
+  {
+    chapterName: 'chapter-x2',
+    title: 'moins2',
+    distanceToCenter: 120,
+    radius: 10,
+    speed: 4,
+    phi0: 10,
+    bands: [
+    ]
+  }
+];
 export const CHAPTERS_PART_TWO: Chapter[] = [
   {
     chapterName: 'chapter-6',
@@ -734,36 +756,27 @@ export const CHAPTERS_PART_TWO: Chapter[] = [
   },
   {
     chapterName: 'chapter-13',
-    title: 'metalcore around\n' +
-      'the world',
+    title: '13 metalcore all over the world',
     distanceToCenter: 100,
     radius: 7,
     speed: 2,
     phi0: 145,
     bands: [
       {
-        bandName: 'parkway drive', distanceToCenter: 15, radius: 3, speed: 2, phi0: 280,
-        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/159qqlGwzE04xyqpfAwRLo?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+        bandName: 'babymetal', distanceToCenter: 15, radius: 3, speed: 2, phi0: 280,
+        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/630wzNP2OL7fl4Xl0GnMWq?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'i killed the prom queen', distanceToCenter: 15, radius: 5, speed: 3, phi0: 10,
-        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/3DY26PgCL4tKVUPQBtBWei?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+        bandName: 'crystal lake', distanceToCenter: 25, radius: 2, speed: 7, phi0: 50,
+        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0A7d0PJxaLO7CGI94ht6PX?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'northlane', distanceToCenter: 25, radius: 2, speed: 7, phi0: 50,
-        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/3qyg72RGnGdF521zMU02u9?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+        bandName: 'the devil wears prada', distanceToCenter: 25, radius: 5, speed: 2, phi0: 111,
+        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0NbQe5CNgh4YApOCDuHSjb?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       },
       {
-        bandName: 'the amity affliction', distanceToCenter: 25, radius: 3, speed: 5, phi0: 71,
-        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/6kNKUYGn6VNGsRoXmyoDPK?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
-      },
-      {
-        bandName: 'polaris', distanceToCenter: 25, radius: 5, speed: 2, phi0: 111,
-        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0v2e0oznnTaIXKLGKHphfX?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
-      },
-      {
-        bandName: 'in hearts wake', distanceToCenter: 35, radius: 3, speed: 5, phi0: 201,
-        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/30BDCIM0IdglDaLzvCYd0N?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+        bandName: 'rise of the northstar', distanceToCenter: 35, radius: 3, speed: 5, phi0: 201,
+        embeddedSpotify: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/5vDfbSPkurKQxpVVXALJ4K?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
       }
     ],
     description: 'japanisch »kawaii« trifft\n' +

@@ -6,6 +6,6 @@ OF METALCORE</h1>
     <div class="chapter-body">{{description.text}}</div>
     <button class="back" *ngIf="!description.isDefault && description?.isHelpText" (click)="closeHelpText()"> danke, los geht's!</button>
     <button class="back" *ngIf="!description.isDefault && !description?.isHelpText" (click)="reset()"> zurück</button>
-    <button class="back" *ngIf="description.isDefault && notOnFirstPage()" routerLink="/part-1">zurück</button>
+    <button class="back big" *ngIf="description.isDefault && notOnFirstPage()" routerLink="/part-1">zurück zu den anfängen</button>
   </div>
 </div>

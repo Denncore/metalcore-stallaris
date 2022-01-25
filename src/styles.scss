@@ -33,4 +33,7 @@ h1 {
   &:hover {
     background: rgba(255, 255, 255, 0.34);
   }
+  &.big {
+    width: 330px;
+  }
 }

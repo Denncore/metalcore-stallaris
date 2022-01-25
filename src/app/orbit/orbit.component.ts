@@ -3,7 +3,6 @@ import { Band, Chapter, Description, isBand, isGenre, isPlanet, Planet2 } from '
 import * as d3 from 'd3';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { HELP_DESCRIPTION } from 'src/app/data';
 import { State } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import * as DataActions from 'src/app/store/actions';
@@ -96,14 +95,23 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
           if (component.router.url.indexOf('part-1') > -1) {
             d3.select(this)
               .attr('cursor', 'pointer');
+
+            d3.select('#hoverTitle')
+              .text('weiter zu part 2');
           }
         })
         .on('mouseout', function () {
-          d3.select(this)
-            .attr('cursor', 'default');
+          if (component.router.url.indexOf('part-1') > -1) {
+            d3.select(this)
+              .attr('cursor', 'default');
+            d3.select('#hoverTitle')
+              .text('');
+          }
         }).on('click', function () {
         if (component.router.url.indexOf('part-1') > -1) {
           component.router.navigate(['/part-2']);
+        } else if (component.router.url.indexOf('part-2') > -1) {
+          component.router.navigate(['/part-3']);
         }
       });
     }
@@ -160,7 +168,7 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
           clearInterval(component.deltaGenreIncrease);
           if (isGenre(d)) {
             d3.select('#hoverTitle')
-              .text(d.title as string)
+              .text(d.title as string);
           }
         })
           .on('mouseout', function () {
@@ -169,55 +177,60 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
             }
             if (isGenre(d)) {
               d3.select('#hoverTitle')
-                .text('')
+                .text('');
             }
           });
       }
-
-
       // draw it's Moons
+
       if (isGenre(d)) {
-        d3.select(this).append('g').attr('transform', `translate(${d.distanceToCenter}, 0)`)
+        const chapterName = d.chapterName;
+        d3.select(this).append('g')
+          .attr('transform', `translate(${d.distanceToCenter}, 0)`)
           .selectAll('g.moon').data(d.bands as Band[]).enter().append('g')
           .attr('class', 'band_cluster').each(function (d, i) {
-          // draw the orbit of the moon
-          d3.select(this).append('circle')
-            .attr('class', 'orbit')
-            .attr('r', d.distanceToCenter)
-            .attr('stroke-width', '2');
-
+            // draw the orbit of the moon
+          // only draw one orbit for the cluster
+          const clusterOrbitId = 'band-cluster-' + chapterName + '-' + d.distanceToCenter;
+          if (d3.select('#'+ clusterOrbitId).size() === 0) {
+            d3.select(this).append('circle')
+              .attr('id', clusterOrbitId)
+              .attr('class', 'orbit')
+              .attr('r', d.distanceToCenter)
+              .attr('stroke-width', '2');
+          }
           // draw the moon
           d3.select(this).append('circle').attr('r', d.radius).attr('cx', d.distanceToCenter)
             .attr('cy', 0)
-            .attr('class', 'moon');
+            .attr('class', 'moon')
+            .on('click', function (event, i) {
+              event.stopPropagation();
+              if (component.isZoomed) {
+                d3.select('#embedded').remove();
+                d3.select('#orbit-container').append('div')
+                  .attr('id', 'embedded')
+                  .html((i as Band).embeddedSpotify as string);
+              }
+            })
+            .on('mouseover', function () {
+              if (component.isZoomed) {
+                d3.select(this)
+                  .attr('cursor', 'pointer');
+                clearInterval(component.deltaBandIncrease);
+              }
+            })
+            .on('mouseout', function () {
+              if (component.isZoomed) {
+                d3.select(this)
+                  .attr('cursor', 'default');
+                component.deltaBandIncrease = component.createIntervall(DeltaType.BAND);
+              }
+            });
         })
           .attr('transform', function (d) {
             const rotation = d.phi0 + (component.delta.deltaBand * d.speed);
             return `rotate(${rotation})`;
           })
-          .on('click', function (event, i) {
-            event.stopPropagation();
-            if (component.isZoomed) {
-              d3.select('#embedded').remove();
-              d3.select('#orbit-container').append('div')
-                .attr('id', 'embedded')
-                .html(i.embeddedSpotify as string);
-            }
-          })
-          .on('mouseover', function () {
-            if (component.isZoomed) {
-              d3.select(this)
-                .attr('cursor', 'pointer');
-              clearInterval(component.deltaBandIncrease);
-            }
-          })
-          .on('mouseout', function () {
-            if (component.isZoomed) {
-              d3.select(this)
-                .attr('cursor', 'default');
-              component.deltaBandIncrease = component.createIntervall(DeltaType.BAND);
-            }
-          });
       }
     })
       .attr('transform', function (d) {
@@ -296,7 +309,7 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
         title: data.title,
         text: data.description,
         isHelpText: false
-      }
+      };
       this.store.dispatch(DataActions.updateDescription({description}));
     }
   }
