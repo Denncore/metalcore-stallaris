@@ -200,6 +200,7 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
               .attr('stroke-width', '2');
           }
           // draw the moon
+          const bandName: string = d.bandName as string;
           d3.select(this).append('circle').attr('r', d.radius).attr('cx', d.distanceToCenter)
             .attr('cy', 0)
             .attr('class', 'moon')
@@ -212,8 +213,10 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
                   .html((i as Band).embeddedSpotify as string);
               }
             })
-            .on('mouseover', function () {
+            .on('mouseover', function (event) {
               if (component.isZoomed) {
+                d3.select('#hoverTitle')
+                  .text(bandName);
                 d3.select(this)
                   .attr('cursor', 'pointer');
                 clearInterval(component.deltaBandIncrease);
@@ -221,6 +224,8 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
             })
             .on('mouseout', function () {
               if (component.isZoomed) {
+                d3.select('#hoverTitle')
+                  .text('');
                 d3.select(this)
                   .attr('cursor', 'default');
                 component.deltaBandIncrease = component.createIntervall(DeltaType.BAND);
