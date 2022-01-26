@@ -97,7 +97,7 @@ export class OrbitComponent implements AfterViewInit, OnDestroy {
               .attr('cursor', 'pointer');
 
             d3.select('#hoverTitle')
-              .text('weiter zu part 2');
+              .text('weiter zu teil 2');
           }
         })
         .on('mouseout', function () {
